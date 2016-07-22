@@ -1,3 +1,8 @@
+import java.util.HashSet;
+import java.util.Set;
+
+
+
 /*Matt Napper
  * SDev 200 00c
  * session 8 program assignment 1 rework
@@ -5,6 +10,9 @@
  */
 public class Pizza extends MenuItem {
 	
+	
+
+
 	public Pizza(){
 	}
 
@@ -46,18 +54,26 @@ public class Pizza extends MenuItem {
        return crustType;
     }
    	
+     //set toppings in TEST by typing 
+     //mypizza.Toppings.add(""); toppings goes between " "
+   Set<String> Toppings = new HashSet<String>();
+	   
    
+   public void numOfToppings(){
+	   Toppings.size();
+   }
  
 	@Override
 	public String getDescription() {
 		// abstract from MenuItem
-		return "A warm and delious athentic " + getPizzaSize() + " Pizza with " + getPizzaSize() + " crust for $";
+		return "A warm and delious athentic " + getPizzaSize() + " Pizza with " + getCrustType() + " crust ";
 	}
 	
+	//2 decimal formated string for price
 	@Override
 	public String toString() {
 		// abstract from MenuItem
-		return getDescription() + getPrice();
+		return getDescription() + "with " + Toppings + ", for $" +  String.format("%.2f",(getPrice() + (Toppings.size() * 0.50)));
 	}
 
 
@@ -83,5 +99,7 @@ public class Pizza extends MenuItem {
    	 }
 		return price;
 	}
+
+	
 
 }
