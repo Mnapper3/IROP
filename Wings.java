@@ -12,21 +12,22 @@
               
               
   Modification log: 
-  07/97/16 - Class initial coding.
-
-              
+  07/17/16 - Class initial coding.
+  07/21/16 - Change enum for Sauce.  Made them all capital letters.
+             Moved price calculation to GetPrice from Wings(type, sauce, qty)
+             changed to String to retrieve price via GetPrice method
 */              
 public class Wings extends Appetizer {
 private Integer wingsQty = 1;
 private double wingsPrice = 0.60;
 private String wingsDescription = "Wings";
-private String wingsStyle = "Traditional";	
-private String wingsSause = "Naked";
+private String wingsStyle = "TRADITIONAL";	
+private String wingsSause = "NAKED";
 
 
 
 public static enum Type {TRADITIONAL, BONELESS};
-private enum Sauce {Naked, Mild, Hot, Garlic, BBQ};
+private enum Sauce {NAKED, MILD, HOT, GARLIC, BBQ};
 
 
 	public Wings(String type, String sauce, int qty ) {
@@ -35,13 +36,6 @@ private enum Sauce {Naked, Mild, Hot, Garlic, BBQ};
 		this.wingsSause = sauce.toUpperCase();
 		this.wingsQty = qty;
 		
-  		Type allTypes[] = Type.values();
-  		for (int i = 1; i < allTypes.length; i ++) {
-  		  if (Type.TRADITIONAL.name() == wingsStyle) 	wingsPrice = .060;
-  		  if (Type.BONELESS.name() == wingsStyle) 	wingsPrice = .070;
-  		}
-  		wingsPrice = Math.rint(wingsQty * wingsPrice * 100) / 100.0 ; 
-  		
 	}
 	
 
@@ -62,7 +56,7 @@ private enum Sauce {Naked, Mild, Hot, Garlic, BBQ};
 	  public String toString() {
 	    return "Order: " + wingsDescription + " - Style is " + wingsStyle 
 	    		+ "; Sause is " + wingsSause + "; Quantity Ordered: " + 
-	    		wingsQty + "; Order Price is : " + wingsPrice;
+	    		wingsQty + "; Order Price is : " + getPrice();
 	  } 
 
 	@Override
@@ -83,6 +77,12 @@ private enum Sauce {Naked, Mild, Hot, Garlic, BBQ};
 
 	@Override
 	public double getPrice() {
+		Type allTypes[] = Type.values();
+  		for (int i = 1; i < allTypes.length; i ++) {
+  		  if (Type.TRADITIONAL.name() == wingsStyle) 	wingsPrice = .060;
+  		  if (Type.BONELESS.name() == wingsStyle) 	wingsPrice = .070;
+  		}
+  		wingsPrice = Math.rint(wingsQty * wingsPrice * 100) / 100.0 ; 
 		return wingsPrice;
 	}
 
